@@ -1,9 +1,9 @@
 const sequelize = require ('sequelize')
 const db = require ('../config/config')
 
-module.exports = db.define('role',{
+module.exports = db.define('roles',{
     role_id: {
-        type: sequelize.STRING,
+        type: sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
@@ -13,6 +13,7 @@ module.exports = db.define('role',{
     },    
 },{
     timestamps:false,
+    freezeTableName: true
 })
 
 

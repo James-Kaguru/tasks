@@ -13,6 +13,6 @@ router.use('/users',user)
 router.use('/roles',role)
 router.use('/permissions',permission)
 router.use('/tasks',task)
-router.use('/assigned_tasks',assigned_task)
+router.use('/assigned-tasks',assigned_task)
 
 module.exports = router;

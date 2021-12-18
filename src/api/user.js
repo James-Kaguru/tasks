@@ -1,14 +1,15 @@
 const { Router } = require('express');
-const { User } = require('../models/User');
+const  User  = require('../models/User');
 
-const { handleSequelizeErrors } = require('../../services/services');
+const { handleSequelizeErrors } = require('../services/services');
 const router = Router();
 
 
 //signup
 router.post('/', async (req,res) => {
     try{        
-        res.json(await User.create(req.query))
+        const user = await User.create(req.body)
+        res.json(user)
     } catch(err) { 
         res.status(400).json(handleSequelizeErrors(err)) 
     }
@@ -45,7 +46,7 @@ router.put('/:user_id', async (req,res) => {
                 user_id: req.params.user_id,
             }})
         if(!user) res.status(400).json("Record was not found.")
-        Object.assign(user,req.query)
+        Object.assign(user,req.body)
         await user.save()
         res.json(user)
     }
@@ -70,19 +71,20 @@ router.delete('/:user_id', async (req,res) => {
     }       
 })
 
-
-
-
 //login
-router.post('/', async (req,res) => {
+router.post('/login', async (req,res) => {
     try{        
         const user = await User.findOne({
             where:{
-                username: req.query.username,
-                password: req.query.password,
+                username: req.body.username,
+                password: req.body.password,
         }})
-        if(!user) res.status(400).json("Invalid username or password")
-        res.json(user)
+        if(!user) { 
+            res.status(400).json("Invalid username or password") 
+        } else{
+            res.json(user)
+        }
+        
     } catch(err) { 
         res.status(400).json(handleSequelizeErrors(err)) 
     }

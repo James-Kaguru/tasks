@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const { Permission } = require('../models/Permission');
+const Permission = require('../models/Permission');
 
 const { handleSequelizeErrors } = require('../services/services');
 const router = Router();
 
 router.post('/', async (req,res) => {
     try{        
-        res.json(await Permission.create(req.query))
+        res.json(await Permission.create(req.body))
     } catch(err) { 
         res.status(400).json(handleSequelizeErrors(err)) 
     }        
@@ -46,7 +46,7 @@ router.put('/:permission_id', async (req,res) => {
                 permission_id: req.params.permission_id,
             }})
         if(!permission) res.status(400).json("Record was not found.")
-        Object.assign(permission,req.query)
+        Object.assign(permission,req.body)
         await permission.save()
         res.json(permission)
     }

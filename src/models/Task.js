@@ -1,24 +1,28 @@
 const sequelize = require ('sequelize')
 const db = require ('../config/config')
 
-module.exports = db.define('task',{
+module.exports = db.define('tasks',{
     task_id: {
-        type: sequelize.STRING,
+        type: sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
     name:{
-        type: sequelize.STRING
+        type: sequelize.STRING,
+        allowNull: false,
     },
     user_id:{
-        type: sequelize.STRING,
+        type: sequelize.INTEGER,
+        allowNull: false,
         references:{
-            model: "User",
+            model: "users",
             key:"user_id"
         }
+        
     }
 },{
     timestamps:false,
+    freezeTableName: true
 })
 
 

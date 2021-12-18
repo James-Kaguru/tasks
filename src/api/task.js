@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const { Task } = require('../models/Task');
+const Task = require('../models/Task');
 
-const { handleSequelizeErrors } = require('../../services/services');
+const { handleSequelizeErrors } = require('../services/services');
 const router = Router();
 
 
 router.post('/', async (req,res) => {
     try{        
-        res.json(await Task.create(req.query))
+        res.json(await Task.create(req.body))
     } catch(err) { 
         res.status(400).json(handleSequelizeErrors(err)) 
     }
@@ -31,8 +31,9 @@ router.get('/', async (req,res) => {
     try{
         const tasks = await Task.findAll({
             where:{
-            user_id: req.query.user_id,
-        }})
+                user_id: req.query.user_id,
+            }
+        })
         res.json(tasks)
     }
     catch(err) { 

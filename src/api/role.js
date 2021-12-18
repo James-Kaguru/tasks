@@ -1,12 +1,11 @@
 const { Router } = require('express');
-const { Role } = require('../models/Role');
-
-const { handleSequelizeErrors } = require('../../services/services');
+const Role = require('../models/Role');
+const { handleSequelizeErrors } = require('../services/services');
 const router = Router();
 
 router.post('/', async (req,res) => {
     try{        
-        res.json(await Role.create(req.query))
+        res.json(await Role.create(req.body))
     } catch(err) { 
         res.status(400).json(handleSequelizeErrors(err)) 
     }        
@@ -42,7 +41,7 @@ router.put('/:role_id', async (req,res) => {
                 role_id: req.params.role_id,
             }})
         if(!role) res.status(400).json("Record was not found.")
-        Object.assign(role,req.query)
+        Object.assign(role,req.body)
         await role.save()
         res.json(role)
     }

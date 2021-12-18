@@ -1,9 +1,9 @@
 const sequelize = require ('sequelize')
 const db = require ('../config/config')
 
-module.exports = db.define('user',{
+module.exports = db.define('users',{
     user_id: {
-        type: sequelize.STRING,
+        type: sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
@@ -21,16 +21,16 @@ module.exports = db.define('user',{
         type: sequelize.STRING
     },
     role_id:{
-        type: sequelize.STRING,
+        type: sequelize.INTEGER,
         references:{
-            model: "Role",
+            model: "roles",
             key:"role_id"
         }
     }
 },{
     timestamps:false,
+    freezeTableName: true
 })
-
 
 
 
