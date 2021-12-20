@@ -8,7 +8,9 @@ const startServer = async () => {
     await db.sync().catch(e => console.error(e.message))
     
     
-    await db.authenticate().catch(e => {throw Error("Database connection error")})
+    await db.authenticate().catch(e => {throw Error(e)})
+    console.log("we did it")
+
     const app = express();
     app.use(cors())    
     app.use(express.json())

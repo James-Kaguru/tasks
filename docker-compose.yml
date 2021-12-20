@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  backend:
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tasks_db
+      MYSQL_USER: jimmy
+      MYSQL_PASSWORD: password
+    build: .
+    ports:
+      - 5000:5000
+    depends_on:
+      - mysql_server
+  mysql_server:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: tasks_db
+      MYSQL_USER: jimmy
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+    
+
