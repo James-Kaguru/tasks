@@ -1,8 +1,8 @@
 # Task app
-## _Front End repository_
+## _Backend End repository_
 
 
-Tasks is an front end built with react and uses fetch api to connect to the backend.
+Tasks is an front end built with react on the front end and uses fetch api to connect to the backend built with node.js
 
 
 ## Features
@@ -25,13 +25,10 @@ Tasks is an front end built with react and uses fetch api to connect to the back
 ## Test cases
 - adding a role
 
-This text you see here is *actually- written in Markdown! To get a feel
-for Markdown's syntax, type some text into the left window and
-watch the results in the right.
 
 # Installation
 
 Task app requires docker installed and a logged in user
 ## steps
- - docker pull jimmykaguru/front-end
- - docker run jimmykaguru/front-end
+ - docker pull jimmykaguru/backend
+ - docker run jimmykaguru/backend
